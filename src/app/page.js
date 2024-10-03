@@ -15,7 +15,7 @@ import {
 import { useState } from "react";
 import { Small } from "@/components/Small";
 
-export default function Home() {
+export default function Home({ name }) {
   const router = useRouter();
   const MentoringIcon = (props) => (
     <svg
@@ -68,6 +68,7 @@ export default function Home() {
   const handleLogin = (e) => {
     e.preventDefault();
     if (username) {
+      name = username;
       // Redirect to meeting page with the username as query param
       router.push(`/meeting?username=${username}`);
     }
