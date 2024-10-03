@@ -1,14 +1,18 @@
-"use client";
-import { Suspense, useEffect, useState } from "react";
+"use client"; // Ensures the component is client-side only
+
+import { Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { JaaSMeeting } from "@jitsi/react-sdk";
 import { toast } from "react-toastify";
 import { Large } from "@/components/Large";
 import { Small } from "@/components/Small";
 
-// Separate the meeting logic into a component
-function MeetingContent({ username }) {
+function MeetingContent() {
+  const searchParams = useSearchParams();
+  const username = searchParams.get("username"); // Get the username from query param
   const router = useRouter();
+
+  if (!username) return <p>Loading...</p>;
 
   return (
     <div className="bg-[#000000] h-[100vh] overflow-hidden">
@@ -69,12 +73,9 @@ function MeetingContent({ username }) {
 }
 
 export default function Meeting() {
-  const searchParams = useSearchParams();
-  const username = searchParams.get("username"); // Get the username from query param
-
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      {username ? <MeetingContent username={username} /> : <p>Loading...</p>}
+      <MeetingContent />
     </Suspense>
   );
 }
