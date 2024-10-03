@@ -1,101 +1,198 @@
+"use client";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import logo from "@/assets/logo.png";
+import illustration from "@/assets/ill.jpg";
+import { Large } from "@/components/Large";
+import {
+  Button,
+  FormHelperText,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
+import { useState } from "react";
+import { Small } from "@/components/Small";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const router = useRouter();
+  const MentoringIcon = (props) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width={24}
+      height={24}
+      color={"#000000"}
+      fill={"none"}
+      {...props}
+    >
+      <path
+        d="M12 22L10 16H2L4 22H12ZM12 22H16"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12 13V12.5C12 10.6144 12 9.67157 11.4142 9.08579C10.8284 8.5 9.88562 8.5 8 8.5C6.11438 8.5 5.17157 8.5 4.58579 9.08579C4 9.67157 4 10.6144 4 12.5V13"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M19 13C19 14.1046 18.1046 15 17 15C15.8954 15 15 14.1046 15 13C15 11.8954 15.8954 11 17 11C18.1046 11 19 11.8954 19 13Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      />
+      <path
+        d="M10 4C10 5.10457 9.10457 6 8 6C6.89543 6 6 5.10457 6 4C6 2.89543 6.89543 2 8 2C9.10457 2 10 2.89543 10 4Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      />
+      <path
+        d="M14 17.5H20C21.1046 17.5 22 18.3954 22 19.5V20C22 21.1046 21.1046 22 20 22H19"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  const [username, setUsername] = useState("srikanth");
+
+  const handlechange = (e) => {
+    setUsername(e.target.value);
+  };
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (username) {
+      // Redirect to meeting page with the username as query param
+      router.push(`/meeting?username=${username}`);
+    }
+  };
+
+  return (
+    <div className="h-screen flex flex-col  w-screen bg-white">
+      <div className="w-full h-[10vh] p-4  ">
+        <div className="flex flex-row justify-between rounded-xl shadow-lg items-center gap-4">
+          <div className="flex flex-row gap-2">
+            <div className="h-full p-4 pr-0">
+              <img
+                src={logo.src}
+                style={{ height: "40px", width: "auto" }}
+                alt="logo"
+              />
+            </div>
+            <div className="h-full flex flex-col p-4 pl-0 ">
+              <h1 className="text-lg font-bold text-black">Meet</h1>
+            </div>
+          </div>
+          <div
+            onClick={() => router.push("/login")}
+            className="p-4 flex cursor-pointer flex-row gap-2 items-center justify-center h-full"
           >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <MentoringIcon />
+            <div className="h-full flex flex-col justify-end">
+              <h1 className="text-base  text-black">Support</h1>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+
+      <div className="w-full h-[90vh] flex flex-col items-center justify-center">
+        <Large>
+          <div className="flex w-[80vw]  ">
+            <div className="w-full h-full bg-white flex grid grid-cols-5 gap-8">
+              <div className="w-full col-span-3 h-full flex flex-col justify-center items-center">
+                <img src={illustration.src} alt="logo" fill />
+              </div>
+              <div className="w-full col-span-2 h-full flex flex-col gap-2 ">
+                <h1 className="text-lg text-start font-bold text-black">
+                  MEET. CONNECT. COMMUNICATE.
+                </h1>
+
+                <h1 className="text-base text-start font-bold text-black">
+                  Connect with your team, wherever you are.
+                </h1>
+                <br />
+                <FormHelperText>
+                  This username is fetched from JWT token recieved from WSO2.For
+                  now we can select the name and proceed.
+                </FormHelperText>
+                <Select
+                  size="small"
+                  className="mb-4"
+                  value={username}
+                  onChange={handlechange}
+                >
+                  <MenuItem value="srikanth">Srikanth</MenuItem>
+                  <MenuItem value="raghav">Raghav</MenuItem>
+                  <MenuItem value="pavan">Pavan</MenuItem>
+                  <MenuItem value="kiran">Kiran</MenuItem>
+                </Select>
+                <TextField
+                  variant="outlined"
+                  disabled
+                  label="Username"
+                  value={username}
+                />
+                <br />
+                <Button variant="contained" onClick={handleLogin}>
+                  Join Meeting
+                </Button>
+              </div>
+            </div>
+          </div>
+        </Large>
+        <Small>
+          <div className="flex w-[80vw]  overflow-y-auto">
+            <div className="w-full h-full bg-white flex grid grid-cols-5 gap-8">
+              <div className="w-full col-span-5 h-full flex flex-col justify-center items-center">
+                <img src={illustration.src} alt="logo" fill />
+              </div>
+              <div className="w-full col-span-5 h-full flex flex-col gap-2 ">
+                <h1 className="text-lg text-start font-bold text-black">
+                  MEET. CONNECT. COMMUNICATE.
+                </h1>
+
+                <h1 className="text-base text-start font-bold text-black">
+                  Connect with your team, wherever you are.
+                </h1>
+                <br />
+                <FormHelperText>
+                  This username is fetched from JWT token recieved from WSO2.For
+                  now we can select the name and proceed.
+                </FormHelperText>
+                <Select
+                  size="small"
+                  className="mb-4"
+                  value={username}
+                  onChange={handlechange}
+                >
+                  <MenuItem value="srikanth">Srikanth</MenuItem>
+                  <MenuItem value="raghav">Raghav</MenuItem>
+                  <MenuItem value="pavan">Pavan</MenuItem>
+                  <MenuItem value="kiran">Kiran</MenuItem>
+                </Select>
+                <TextField
+                  variant="outlined"
+                  disabled
+                  label="Username"
+                  value={username}
+                />
+                <br />
+                <Button variant="contained" onClick={handleLogin}>
+                  Join Meeting
+                </Button>
+              </div>
+            </div>
+          </div>
+        </Small>
+      </div>
+
+      {/* <button onClick={() => router.push("/login")}>Navigate to login</button> */}
     </div>
   );
 }
